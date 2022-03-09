@@ -46,7 +46,6 @@ body {
     color: #42515f;
 }
 
-/* UC 2 */
 
 .form-content {
     min-height: calc(100% - 80px);
@@ -114,8 +113,6 @@ label {
     
 }
 
-/* UC 3 */
-
 .profile-radio-content {
     display: flex;
     flex-direction: row;
@@ -132,9 +129,14 @@ label {
     border-radius: 50%;
     margin-left: 12px;
 }
-
-/* UC 5 */
-
+.startDate {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    
+}
 select {
     padding: 12px;
     border: 1px solid #ccc;
@@ -146,8 +148,6 @@ select {
     background-color: transparent;
     margin-right: 20px;
 }
-
-/* UC 6 */
 
 .buttonParent {
     display: flex;
@@ -195,7 +195,7 @@ select {
     opacity: 0.3;
 }
 
-error-output{
+.text-error{
     margin-left: 10px;
     font-size: 12px;
     font-style: italic;

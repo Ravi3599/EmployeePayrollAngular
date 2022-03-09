@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,12 +10,18 @@ import { Router } from '@angular/router';
 export class FormComponent implements OnInit {
 
   constructor(private router:Router) { }
+  employee:any=[];
 
   ngOnInit(): void {
   }
+
   
-  onCancle(){
+  onCancel(){
     this.router.navigate(["dashboard"]);
   }
+  onSubmit(form:NgForm){
+    console.log(form.value);
+  }
+
 
 }

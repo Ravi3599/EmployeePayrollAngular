@@ -52,4 +52,25 @@
     font-size: x-large;
     color: rgb(236, 255, 127);
   }
+  .btn {
+    font: normal normal normal 22px/29px Roboto;
+    background-color: #82A70C;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 15px;
+    opacity: 1;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .button{
+    margin-left: 624px;
+  }
+
+
+  
   
