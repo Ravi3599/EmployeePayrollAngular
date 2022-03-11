@@ -75,6 +75,7 @@ body {
     opacity: 1;
     padding-bottom: 20px;
     margin-left: 50px;
+    text-align: center;
 }
 
 .row-content {
@@ -202,10 +203,14 @@ select {
     color: red;
     white-space: nowrap;
 }
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
 
 .button:hover {
     box-shadow: 0px 8px 15px rgba(77, 74, 74, 0.3);
 }
+
 
 @media only screen and (max-width: 960px) {
     .cancelButton {

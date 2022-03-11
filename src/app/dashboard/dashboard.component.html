@@ -2,7 +2,7 @@
   <div class="header-content employee-header">
     <div class="emp-detail-text">
       Employee Details
-      <div class="emp-count">10</div>
+      <div class="emp-count"></div>
     </div>
       <button class="add-button" (click)="onAddUser()"><img src="../assets/plus_symbol.svg" />Add User</button>
   </div>
@@ -15,8 +15,9 @@
     <table id="table-display" class="table">
       <tr>
         <!--Table header-->
-        <th></th>
-        <th>Name</th>
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
         <th>Gender</th>
         <th>Department</th>
         <th>Salary</th>
@@ -24,49 +25,21 @@
         <th>Actions</th>
     </tr>
     <tr>
-      <td>
-          <img class="profile" src="../assets/profile_img-2.png" alt="">
-      </td>
-      <td>Ravi</td>
-      <td>Male</td>
-      <td>
-          <div class="dept-label">
-              <h6>Finance</h6>
-          </div>
-      </td>
-      <td>0</td>
-      <td>1 January 2019</td>
+      
+<tr *ngFor="let emp of employee.data" class="detailoftab">
+  <td>{{emp.id}}</td>
+  <td>{{emp.firstName | titlecase}}</td>
+  <td>{{emp.lastName | titlecase}}</td>
+  <td>{{emp.gender | uppercase}}</td>
+  <td>{{emp.department}}</td>
+  <td>{{emp.salary | currency:'&#8377;' }}</td>
+  <td>{{emp.date | date }}</td>
+  <td>
+      <Button type="button" class="btn btn-outline-danger " name="delete" (click)="deleteById(emp.id)"><img src="../assets/delete.svg">Delete</Button>
+      &nbsp;
+      <Button type="button" class="btn btn-outline-success " name="edit" (click)="editById(emp.id)"><img src="../assets/edit.svg" >Edit</Button>
+  </td>
 
-      <!--To update and delete an employee from the database-->
-      <td>
-           
-          <img src="../assets/delete.svg" alt="delete">
-          <img src="../assets/edit.svg" alt="edit">
-      </td>
-  </tr>
-  <tr>
-    <td>
-        <img class="profile" src="../assets/profile_img-4.png" alt="">
-    </td>
-    <td>Sharavn</td>
-    <td>Male</td>
-    <td>
-        <div class="dept-label">
-            <h6>Operations</h6>
-        </div>
-        <div class="dept-label">
-          <h6>Marketing</h6>
-      </div>
-    </td>
-    <td>550000</td>
-    <td>12 October 2018</td>
-
-    <!--To update and delete an employee from the database-->
-    <td>
-         
-        <img src="../assets/delete.svg" alt="delete">
-        <img src="../assets/edit.svg" alt="edit">
-    </td>
 </tr>
     </table>
   </div>

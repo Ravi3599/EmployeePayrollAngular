@@ -1,4 +1,4 @@
-.add-button {
+.add-button{
     font: normal normal normal 22px/29px Roboto;
     letter-spacing: 0px;
     color: #ffffff;
@@ -129,3 +129,4 @@
     width: 960px;
     transition: width 0.4s ease-in-out;
 }
+

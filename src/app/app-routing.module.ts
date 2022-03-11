@@ -8,6 +8,7 @@ const routes: Routes = [
   {path:'',redirectTo:'/dashboard', pathMatch:'full'},
   {path:"dashboard",component:DashboardComponent},
   {path:"form",component:FormComponent},
+  {path:"update/:Id" , component:FormComponent},
   {path:"**",component:PageNotFoundComponent}
 ];
 

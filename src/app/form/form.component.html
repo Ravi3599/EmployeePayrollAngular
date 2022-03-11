@@ -1,35 +1,48 @@
 <div class="form-content">
-    <form class="form" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
-        <div class="form-head">Employee Payroll Form</div>
+    <form class="form" *ngIf="!submitted" #myForm="ngForm" novalidate>
+        <div class="form-head">{{title}}</div>
         <div class="row-content">
-            <label for="name" class="label text">Name</label>
-            <input type="text" name="name" id="name" class="input required" placeholder="Your Name ..."
-                autocomplete="off" required ngModel><br />
-            <span class="text-error" for="text"></span>
+            <label for="name" class="label text">FirstName</label>
+            <input type="text" name="firstName" id="name" pattern="[a-zA-Z\\s]+$" minlength="4" #firstName="ngModel" class="input" placeholder="Your First Name ..."
+                autocomplete="off" required [(ngModel)]="employee.firstName"><br />
+            <span class="text-error" for="text" *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">Name is Invalid</span>
+            <span class="text-error" for="text" *ngIf="firstName.errors?.['required'] && myForm.submitted">Name is required</span>
+            <span class="text-error" for="text" *ngIf="firstName.errors?.['minlength']">Name must be atleast {{firstName.errors?.['minlength']?.requiredLength}} characters long</span>
+            
         </div>
-
+        <div class="row-content">
+            <label for="name" class="label text">LastName</label>
+            <input type="text" name="lastName" id="name" pattern="[a-zA-Z\\s]+$" minlength="4" #lastName="ngModel" class="input" placeholder="Your Last Name ..."
+                autocomplete="off" required [(ngModel)]="employee.lastName"><br />
+            <span class="text-error" for="text" *ngIf="lastName.invalid && (lastName.touched || lastName.dirty)">Name is Invalid</span>
+            <span class="text-error" for="text" *ngIf="lastName.errors?.['required'] && myForm.submitted">Name is required</span>
+            <span class="text-error" for="text" *ngIf="lastName.errors?.['minlength']">Name must be atleast {{lastName.errors?.['minlength']?.requiredLength}} characters long</span>
+            
+        </div>
         <div class="row-content">
             <label class="label text" for="profile">Profile image</label>
             <div class="profile-radio-content">
                 <label>
-                    <input type="radio" id="profile2" name="profile"
-                        value="../assets/profile_img-1.png" required ngModel>
+                    <input type="radio" id="profile2" name="profile" #profile="ngModel"
+                        value="../assets/profile_img-1.png" required [(ngModel)]="employee.profilePic">
                     <img class="profile" id="image1" src="../assets/profile_img-1.png">
                 </label>
                 <label>
-                    <input type="radio" id="profile2" name="profile"
-                        value="../assets/profile_img-2.png" required ngModel>
+                    <input type="radio" id="profile2" name="profile" #profile="ngModel"
+                        value="../assets/profile_img-2.png" required [(ngModel)]="employee.profilePic">
                     <img class="profile" id="image2" src="../assets/profile_img-2.png">
                 </label>
                 <label>
-                    <input type="radio" id="profile3" name="profile"
-                        value="../assets/profile_img-3.png" required ngModel>
+                    <input type="radio" id="profile3" name="profile" #profile="ngModel"
+                        value="../assets/profile_img-3.png" required [(ngModel)]="employee.profilePic">
                     <img class="profile" id="image3" src="../assets/profile_img-3.png">
                 </label>
                 <label>
-                    <input type="radio" id="profile4" name="profile"
-                        value="../assets/profile_img-4.png" required ngModel>
+                    <input type="radio" id="profile4" name="profile" #profile="ngModel"
+                        value="../assets/profile_img-4.png" required [(ngModel)]="employee.profilePic">
                     <img class="profile" id="image4" src="../assets/profile_img-4.png">
+                    <span class="text-error" for="text" *ngIf="profile.invalid && (profile.touched || profile.dirty)">Please select profile</span>
+                    <span class="text-error" for="text" *ngIf="profile.errors?.['required'] && myForm.submitted">profile is required</span>
                 </label>
             </div>
         </div>
@@ -37,58 +50,97 @@
         <div class="row-content">
             <label class="label text" for="gender">Gender</label>
             <div>
-                <input type="radio" id="male" name="gender" value="Male" required ngModel>
+                <input type="radio" id="male" name="gender" #gender="ngModel" value="Male" required [(ngModel)]="employee.gender">
                 <label class="text" for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="Female" required ngModel>
+                <input type="radio" id="female" name="gender" #gender="ngModel" value="Female" required [(ngModel)]="employee.gender">
                 <label class="text" for="female">Female</label>
+                <span class="text-error" for="text" *ngIf="gender.invalid && (gender.touched || gender.dirty)">Please select gender</span>
+                <span class="text-error" for="text" *ngIf="gender.errors?.['required'] && myForm.submitted">Gender is required</span>
             </div>
         </div>
 
         <div class="row-content">
             <label class="label text" for="department">Department</label>
-            <div>
-                <input class="checkbox" type="checkbox" id="hr" name="department" value="HR" ngModel>
+            <div >
+                <input class="checkbox" type="checkbox" id="hr" #department="ngModel"  name="department1" value="HR" (click)="getVal('HR')" [ngModel]="employee.department=='HR'">
                 <label class="text" for="hr">HR</label>
-                <input class="checkbox" type="checkbox" id="sales" name="department" value="Sales" ngModel>
+                <input class="checkbox" type="checkbox" id="sales" #department="ngModel"  name="department2" value="Sales" (click)="getVal('Sales')" [ngModel]="employee.department=='Sales'">
                 <label class="text" for="sales">Sales</label>
-                <input class="checkbox" type="checkbox" id="finance" name="department" value="Finance" ngModel>
+                <input class="checkbox" type="checkbox" id="finance" #department="ngModel"  name="department3" value="Finance" (click)="getVal('Finance')" [ngModel]="employee.department=='Finance'">
                 <label class="text" for="finance">Finance</label>
-                <input class="checkbox" type="checkbox" id="engineer" name="department" value="Engineer" ngModel>
+                <input class="checkbox" type="checkbox" id="engineer" #department="ngModel"   name="department4" value="Engineer" (click)="getVal('Engineer')" [ngModel]="employee.department=='Engineer'">
                 <label class="text" for="engineer">Engineer</label>
-                <input class="checkbox" type="checkbox" id="others" name="department" value="Others" ngModel>
-                <label class="text" for="others">Others</label>
+                <input class="checkbox" type="checkbox" id="others" #department="ngModel" name="department5" value="Others" (click)="getVal('Others')" [ngModel]="employee.department=='Others'">
+                <label class="text" for="others">Others</label>  
             </div>
+            <span class="text-error" for="text" *ngIf="department.invalid && (department.touched || department.dirty)">Please select department</span>
+            <span class="text-error" for="text" *ngIf="department.errors?.['required'] && myForm.submitted">Department is required</span> 
         </div>
-        <div class="row-content">
+
+        <!-- <div class="row-content">
+            <label class="label text" for="department">Department</label>
+            <div >
+                <input class="checkbox" type="checkbox" id="hr" #department  name="department1" value="HR" (change)="saveDepartment(department.checked)" [checked]="saveCheckBox">
+                <label class="text" for="hr">HR</label>
+                <input class="checkbox" type="checkbox" id="sales" #department  name="department2" value="Sales" (change)="saveDepartment(hr.checked)" [checked]="saveCheckBox">
+                <label class="text" for="sales">Sales</label>
+                <input class="checkbox" type="checkbox" id="finance" #department  name="department3" value="Finance" (change)="saveDepartment(hr.checked)" [checked]="saveCheckBox">
+                <label class="text" for="finance">Finance</label>
+                <input class="checkbox" type="checkbox" id="engineer" #department   name="department4" value="Engineer" (change)="saveDepartment(hr.checked)" [checked]="saveCheckBox">
+                <label class="text" for="engineer">Engineer</label>
+                <input class="checkbox" type="checkbox" id="others" #department name="department5" value="Others" (change)="saveDepartment(hr.checked)" [ngModel]="saveCheckBox">
+                <label class="text" for="others">Others</label>  
+            </div>
+            <span class="text-error" for="text" *ngIf="department.invalid && (department.touched || department.dirty)">Please select department</span>
+            <span class="text-error" for="text" *ngIf="department.errors?.['required'] && myForm.submitted">Department is required</span> 
+        </div> -->
+        <!--<div class="row-content">
         <label class="label text" for="salary">Salary</label>
             <div>
-                <select id="salary" class="salaryrequired" name="salary" ngModel>
-                    <option selected >Select Salary</option>
-                    <option value="0-5" >0 - 5 LPA</option>
+                <select id="salary"  class="salaryrequired" name="salary" required #salary="ngModel" ngModel>
+                    <option selected >Select Salary</option> 
+                    <option *ngFor="let sal of salaries" value={{sal}}>{{sal}}</option>
                     <option value="5-10" >5 - 10 LPA</option>
                     <option value="10-15" >10 - 15 LPA</option>
-                    <option value="15-20" >15 - 20 LPA </option>
-                    <option value="20+" >20 - Above LPA</option>
+                    <option value="15-20">15 - 20 LPA </option>
+                    <option value="20+">20 - Above LPA</option> 
                 </select>
+                <span class="text-error" for="text" *ngIf="salary.invalid && (salary.touched || salary.dirty)">Please select salary</span>
+                <span class="text-error" for="text" *ngIf="salary.errors?.['required'] && myForm.submitted">Salary is required</span>
             </div>
+        </div> -->
+        <div class="row-content">
+            <label class="label text" for="salary">Choose Your Salary: </label>
+            <input class="input required" type="range" #sal="ngModel" name="salary" id="salary" min="300000" max="800000"
+                step="100" value="400000" [(ngModel)]="employee.salary">
+            <output class="salary-output text" for="salary">{{sal.value}}</output>
+            <span class="text-error" for="text" *ngIf="sal.invalid && (sal.touched || sal.dirty)">Please select salary</span>
+            <span class="text-error" for="text" *ngIf="sal.errors?.['required'] && myForm.submitted">Salary is required</span>
         </div>
+
         <div class="row-content">
             <label class="label text" for="StartDate">Start Date:-</label>
-            <input type="date" class="startDate" id="StartDate" name="date"  required ngModel>
+            <input type="date" class="startDate" id="StartDate" #startdate="ngModel" name="date"  required [(ngModel)]="employee.date">
+            <span class="text-error" for="text" *ngIf="startdate.invalid && (startdate.touched || startdate.dirty)">Please select starting date</span>
+            <span class="text-error" for="text" *ngIf="startdate.errors?.['required'] && myForm.submitted">StartDate is required</span>
         </div>
 
         <div class="row-content">
             <label class="label text" for="notes">Notes</label>
-            <textarea id="notes" class="input required" name="Notes" placeholder="" style="height:100px" ngModel></textarea>
+            <textarea id="notes" class="input required" name="Notes" placeholder="" style="height:100px" [(ngModel)]="employee.notes"></textarea>
         </div>
 
         <div class="buttonParent">
             <button class="resetButton button cancelButton" (click)="onCancel()">Cancel</button>
             <div class="submit-reset">
-                <button type="submit" class="button submitButton" id="submitButton">Submit</button>
+                <button type="button" [disabled]="!myForm.valid" class="button submitButton" id="submitButton" (click)="addEmployee()" *ngIf="this.Id==null" >Submit</button>
+                <button type="button" [disabled]="!myForm.valid" class="button submitButton" id="updateButton" (click)="updateEmployee()" *ngIf="this.Id != null">Update</button>
                 <button type="reset" class="resetButton button">Reset</button>
             </div>
         </div>
-
     </form>
+    <div class="" *ngIf="submitted">
+        <h2 style="text-align: center;"> Submitted Successfully</h2>
+        <h2>Click on dashboard button to go back to Dashboard page</h2>
+    </div>
 </div>
