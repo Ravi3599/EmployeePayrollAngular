@@ -1,3 +1,4 @@
+//Model class with different fields
 export class Employee{
     firstName:string;
     lastName:string;

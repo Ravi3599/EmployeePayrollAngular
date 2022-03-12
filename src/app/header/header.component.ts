@@ -13,9 +13,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   public title:string="Employee Payroll";
+  //Navigates to dashboard component
   onDashboard(){
     this.router.navigate(["dashboard"]);
   }
+  //Navigates to form component
   onForm(){
     this.router.navigate(["form"]);
   }

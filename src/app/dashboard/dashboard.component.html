@@ -2,20 +2,17 @@
   <div class="header-content employee-header">
     <div class="emp-detail-text">
       Employee Details
-      <div class="emp-count"></div>
+      <!--Count of records will be displayed-->
+      <div class="emp-count">{{employee.data.length}}</div>
     </div>
       <button class="add-button" (click)="onAddUser()"><img src="../assets/plus_symbol.svg" />Add User</button>
   </div>
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Search Here" >
-</div>
-
-
   <div class="table-main">
     <table id="table-display" class="table">
       <tr>
         <!--Table header-->
         <th>ID</th>
+        <th>Profile</th>
         <th>FirstName</th>
         <th>LastName</th>
         <th>Gender</th>
@@ -25,9 +22,12 @@
         <th>Actions</th>
     </tr>
     <tr>
-      
-<tr *ngFor="let emp of employee.data" class="detailoftab">
+  <!--Value retrieved from database will be displayed here using http get call done in service -->
+  <tr *ngFor="let emp of employee.data" class="detailoftab">
   <td>{{emp.id}}</td>
+  <td>
+    <img [src]="emp.profilePic" alt="profile" class="">
+  </td>
   <td>{{emp.firstName | titlecase}}</td>
   <td>{{emp.lastName | titlecase}}</td>
   <td>{{emp.gender | uppercase}}</td>
@@ -35,9 +35,8 @@
   <td>{{emp.salary | currency:'&#8377;' }}</td>
   <td>{{emp.date | date }}</td>
   <td>
-      <Button type="button" class="btn btn-outline-danger " name="delete" (click)="deleteById(emp.id)"><img src="../assets/delete.svg">Delete</Button>
-      &nbsp;
-      <Button type="button" class="btn btn-outline-success " name="edit" (click)="editById(emp.id)"><img src="../assets/edit.svg" >Edit</Button>
+      <img src="../assets/delete.svg" (click)="deleteById(emp.id)">
+      <img src="../assets/edit.svg" (click)="editById(emp.id)">
   </td>
 
 </tr>
